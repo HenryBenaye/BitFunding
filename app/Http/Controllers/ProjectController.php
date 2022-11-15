@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -23,7 +26,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -34,7 +37,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $project = new Project();
+        $project->user_id = Auth::user()->id;
+        $project->name = $request['project_name'];
+        $project->description = $request['project_description'];
+        $project->goal = $request['project_goal'];
+        $project->progress = 0;
+
+        $project->save();
+        return redirect()->route('dashboard');
     }
 
     /**
