@@ -11,6 +11,11 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('projects.show',{{\Illuminate\Support\Facades\Auth::user()->id}} )" :active="request()->routeIs('projects.create')">
+                        {{ __('Eigen Projecten') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('projects.create')" :active="request()->routeIs('projects.create')">
                         {{ __('Nieuwe project') }}
                     </x-nav-link>
