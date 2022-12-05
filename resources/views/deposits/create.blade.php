@@ -29,7 +29,7 @@
 {{--                              name="project_description"/>--}}
 {{--            </div>--}}
 
-            <input type="hidden" value="{{$project->id}}" >
+            <input type="hidden" value="{{$project->id}}"  name="project_id" >
 
             <div class="flex items-center justify-end mt-4">
 

@@ -18,14 +18,15 @@ class DepositController extends Controller
     public function store(Request $request)
     {
         $project = Project::find($request['project_id']);
-        $project->amount = $project->amount + $request['amount'];
+        $project->progress = $project->progress + $request['amount'];
         $project->update();
 
         $deposit = new Deposit();
+        $deposit->amount = $request['amount'];
         $deposit->user_id = Auth::user()->id;
         $deposit->project_id = $project->id;
         $deposit->save();
-        
+
         return redirect()->route('dashboard');
     }
 }

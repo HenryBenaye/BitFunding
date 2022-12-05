@@ -27,7 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
         ->name('project.show');
     Route::get('deposit/{project_id}', [DepositController::class, 'deposit'])
         ->name('deposit');
-    Route::post('deposit')
+    Route::post('deposit', [DepositController::class, 'store'])
             ->name('deposit.store');
 });
 require __DIR__.'/auth.php';
