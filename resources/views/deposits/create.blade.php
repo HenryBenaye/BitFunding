@@ -15,7 +15,7 @@
             <div class="mt-4">
                 <x-input-label for="amount" :value="__('Hoeveel')" />
 
-                <x-text-input id="amount" class="block mt-1 w-full"
+                <x-text-input min="0" id="amount" class="block mt-1 w-full"
                               type="number"
                               name="amount"/>
             </div>
@@ -37,6 +37,12 @@
                     {{ __('Klaar') }}
                 </x-primary-button>
             </div>
+
+            <p class="text-red-600">
+                @if($errors->any())
+                    {{ implode('', $errors->all(':message')) }}
+                @endif
+            </p>
         </form>
     </x-auth-card>
 </x-app-layout>

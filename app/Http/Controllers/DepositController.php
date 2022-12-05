@@ -18,7 +18,8 @@ class DepositController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([new DepositValidation()]);
+        $request->validate(['amount' => new DepositValidation()]);
+
         $project = Project::find($request['project_id']);
         $project->progress = $project->progress + $request['amount'];
         $project->update();
