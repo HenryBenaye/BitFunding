@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Deposit extends Model
 {
     use HasFactory;
 
@@ -14,9 +14,8 @@ class Project extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function deposit()
+    public function project()
     {
-        return $this->hasMany(Deposit::class);
+        return $this->belongsTo(Project::class);
     }
 }
-

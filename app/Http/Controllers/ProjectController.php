@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deposit;
 use App\Models\Project;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -52,11 +56,12 @@ class ProjectController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function show($id)
     {
-        //
+        $projects = Project::where('user_id', '=', Auth::user()->id)->get();
+        return view('projects.show', ['projects'=>$projects]);
     }
 
     /**
@@ -91,5 +96,13 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showProject($id)
+    {
+        $deposits = Deposit::where('project_id', '=', $id)
+            ->get();
+        $project = Project::find($id);
+        return view('projects.project', ['project'=>$project, 'deposits' => $deposits]);
     }
 }

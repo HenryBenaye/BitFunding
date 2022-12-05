@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepositController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function() {
-    Route::get('/dashboard', [ProjectController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [ProjectController::class, 'index'])
+        ->name('dashboard');
     Route::resource('projects', ProjectController::class);
+    Route::get('project/{project_id}', [ProjectController::class, 'showProject'])
+        ->name('project.show');
+    Route::get('deposit', [DepositController::class, 'deposit'])
+        ->name('deposit');
 });
 require __DIR__.'/auth.php';
