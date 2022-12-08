@@ -22,7 +22,6 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        Mail::to('henry.be@outlook.com')->send(new SuccesMail());
         return view('dashboard',['projects'=> $projects]);
     }
 
