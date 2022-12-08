@@ -45,7 +45,7 @@ class SuccesMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'welcome',
+             view: 'mail.green-light',
         );
     }
 
