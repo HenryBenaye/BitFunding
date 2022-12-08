@@ -103,6 +103,7 @@ class ProjectController extends Controller
         $deposits = Deposit::where('project_id', '=', $id)
             ->get();
         $project = Project::find($id);
-        return view('projects.project', ['project'=>$project, 'deposits' => $deposits]);
+        $progress = floor((100 * $project->progress) / $project->goal);
+        return view('projects.project', ['project'=>$project, 'deposits' => $deposits, 'progress'=>$progress]);
     }
 }
