@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SuccesMail;
 use App\Models\Deposit;
 use App\Models\Project;
 use Illuminate\Contracts\Foundation\Application;
@@ -9,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ProjectController extends Controller
 {
@@ -20,6 +22,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
+        Mail::to('henry.be@outlook.com')->send(new SuccesMail());
         return view('dashboard',['projects'=> $projects]);
     }
 
