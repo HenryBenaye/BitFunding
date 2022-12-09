@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Mail\FailedMail;
+use App\Mail\SuccesMail;
 use App\Models\Project;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -10,6 +12,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
 
 class LongevityCheck implements ShouldQueue
 {
@@ -38,7 +41,11 @@ class LongevityCheck implements ShouldQueue
                 ->diffInWeeks(
                     Carbon::parse($project->created_at));
 
-            if ($date > 14) Project::destroy($project->id);
+            if ($date > 14)
+            {
+                Project::destroy($project->id);
+                Mail::to('henry.be@outlook.com')->send(new FailedMail());
+            }
         }
     }
 }
