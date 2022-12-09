@@ -30,7 +30,6 @@ class DepositController extends Controller
         }
         $project->update();
 
-
         $deposit = new Deposit();
         $deposit->amount = $request['amount'];
         $deposit->user_id = Auth::user()->id;
