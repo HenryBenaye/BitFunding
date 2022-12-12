@@ -15,7 +15,10 @@
                         <div>
                             <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
                                 <div
-                                    class="bg-purple-600 text-xs font-medium text-blue-100 text-center p-1.5 leading-none rounded-full">
+                                    class="bg-purple-600 text-xs font-medium text-blue-100 text-center p-1.5 leading-none rounded-full"
+                                    style="width: {{$project->progress}}%">
+                                    {{$project->progress}}%
+
                                 </div>
                             </div>
                             <div class="w-full flex flex-row justify-between px-2">

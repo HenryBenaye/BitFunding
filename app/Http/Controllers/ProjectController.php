@@ -21,8 +21,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $progressArray = [];
         $projects = Project::all();
-        return view('dashboard',['projects'=> $projects]);
+        foreach ($projects as $project)
+        {
+            $project->progress = floor((100 * $project->progress) / $project->goal);
+        }
+        return view('dashboard',['projects'=> $projects, 'progress' => $progressArray]);
     }
 
     /**
