@@ -9,6 +9,8 @@ use App\Rules\DepositValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Mollie\Laravel\Facades\Mollie;
+
 
 class DepositController extends Controller
 {
@@ -38,5 +40,24 @@ class DepositController extends Controller
 
 
         return redirect()->route('dashboard');
+    }
+
+    public function molliePayment(Request $request)
+    {
+        $payment = Mollie::api()->payments()->create([
+            "amount" => [
+                "currency" => "EUR",
+                "value" => $request['amount'],
+            ],
+            "description" => "Order #12345",
+            "redirectUrl" => route('order.success'),
+            "webhookUrl" => route('webhooks.mollie'),
+            "metadata" => [
+                "order_id" => "12345",
+            ]
+        ]
+        );
+        return redirect($payment->getCheckoutUrl(), 303);
+
     }
 }
