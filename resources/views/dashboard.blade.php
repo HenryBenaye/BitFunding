@@ -12,10 +12,16 @@
                         <a href="{{route("project.show", $project->id)}}">{{$project->name}}</a>
                         <p>{{$project->user->name}}</p>
                         <p>{{$project->description}}</p>
-                        <div class="flex flex-row">
-                            <p>{{$project->progress}}</p>
-                            <progress id="file" value="{{$project->progress}}" max="{{$project->goal}}"></progress>
-                            <p>{{$project->goal}}</p>
+                        <div>
+                            <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                                <div
+                                    class="bg-purple-600 text-xs font-medium text-blue-100 text-center p-1.5 leading-none rounded-full">
+                                </div>
+                            </div>
+                            <div class="w-full flex flex-row justify-between px-2">
+                                <p>€0</p>
+                                <p>€{{$project->goal}}</p>
+                            </div>
                         </div>
                         @if($project->user_id != Auth::user()->id)
                             <div>
