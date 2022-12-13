@@ -47,11 +47,11 @@ class DepositController extends Controller
         $payment = Mollie::api()->payments()->create([
             "amount" => [
                 "currency" => "EUR",
-                "value" => $request['amount'],
+                "value" => "10.00",
             ],
             "description" => "Order #12345",
-            "redirectUrl" => route('order.success'),
-            "webhookUrl" => route('webhooks.mollie'),
+            "redirectUrl" => route('deposit.success'),
+            "webhookUrl" => header("Location: https://ff05-62-195-229-71.eu.ngrok.io "),
             "metadata" => [
                 "order_id" => "12345",
             ]
@@ -60,4 +60,13 @@ class DepositController extends Controller
         return redirect($payment->getCheckoutUrl(), 303);
 
     }
+
+    public function getWebhookUrl()
+    {
+       if ($this->config->getValue(\Mollie\Payment\Config::GENERAL_TYPE, ScopeInterface::SCOPE_STORE) == 'live') {
+                 return $this->urlBuilder->getUrl('mollie/checkout/webhook/', ['_query' => 'isAjax=1']);
+       }
+
+      return '';
+     }
 }

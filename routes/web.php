@@ -29,5 +29,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
         ->name('deposit');
     Route::post('deposit', [DepositController::class, 'molliePayment'])
             ->name('deposit.store');
+    Route::get('deposit/succes', function () {
+        return view('deposit.succes');
+    })->name('deposit.success');
 });
 require __DIR__.'/auth.php';
