@@ -25,12 +25,11 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::resource('projects', ProjectController::class);
     Route::get('project/{project_id}', [ProjectController::class, 'showProject'])
         ->name('project.show');
+    Route::post('/test/{price}', [DepositController::class, 'processPayment'])
+        ->name('processPayment');
     Route::get('deposit/{project_id}', [DepositController::class, 'deposit'])
         ->name('deposit');
-    Route::post('deposit', [DepositController::class, 'molliePayment'])
+    Route::post('deposit', [DepositController::class, 'charge'])
             ->name('deposit.store');
-    Route::get('deposit/succes', function () {
-        return view('deposit.succes');
-    })->name('deposit.success');
 });
 require __DIR__.'/auth.php';
